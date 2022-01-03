@@ -1,0 +1,109 @@
+body {
+    padding: 100px;
+    /*background-image: url('https://phonoteka.org/uploads/posts/2021-04/1618959233_33-phonoteka_org-p-stilnii-gradient-fon-35.jpg');*/
+    background-color: #191840;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: "Helvetica";
+
+}
+
+table, td, th, thead, tr {
+    border: black 2px solid;
+    width: 1000px;
+    text-align: center;
+    vertical-align: top;
+}
+
+tbody {
+    background-color: ghostwhite
+}
+
+.thead-white {
+    background-color: cornsilk;
+}
+
+.container1 {
+    text-align: center;
+    vertical-align: top;
+}
+
+.input-group1 {
+    text-align: center;
+}
+
+
+#selected {
+    height: 50px;
+    width: 20px;
+    vertical-align: middle;
+}
+
+#label {
+    height: 30px;
+    width: 200px;
+    font-size: 20px;
+    vertical-align: middle;
+    color: white;
+
+}
+
+.form-check {
+    /*text-align: center;*/
+    vertical-align: top;
+    margin-right: 900px;
+}
+
+h1 {
+
+    letter-spacing: 5px;
+    color: #fff;
+    text-shadow:
+        /* White glow */
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 21px #fff,
+                /* Green glow */
+            0 0 42px #0fa,
+            0 0 82px #0fa,
+            0 0 92px #0fa,
+            0 0 102px #0fa,
+            0 0 151px #0fa;
+}
+
+h4 {
+    color: white;
+    font-size: 15px;
+}
+
+
+
+#bt1 {
+    background-color: #fff506;
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+#bt2 {
+
+    background-color: crimson;
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    vertical-align: top;
+    color: white;
+    margin-left: 400px;
+}
+
+#description {
+    height: 40px;
+    width: 300px;
+    text-align: center;
+    vertical-align: top;
+}
+
+
+
