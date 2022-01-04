@@ -83,7 +83,7 @@ $(document).ready(function () {
  */
 function uploadInDB() {
     let description = $('#description');
-    if (description.val() == '') {
+    if (description.val() === '') {
         alert('Заполните поле')
         return false;
     }

@@ -39,7 +39,6 @@ public class MainServlet extends HttpServlet {
         output.write(itemJson.getBytes(StandardCharsets.UTF_8));
         output.flush();
         output.close();
-
     }
 
     /***

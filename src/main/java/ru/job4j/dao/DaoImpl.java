@@ -2,13 +2,15 @@ package ru.job4j.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 import ru.job4j.entity.Item;
 
-import javax.persistence.Query;
 import java.util.List;
+import java.util.function.Function;
 
 public class DaoImpl implements Store, AutoCloseable {
 
@@ -29,66 +31,59 @@ public class DaoImpl implements Store, AutoCloseable {
         return Lazy.INST;
     }
 
+    private <T> T tx(Function<Session, T> command) {
+        Session session = sf.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            T rsl = command.apply(session);
+            tx.commit();
+            return rsl;
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
     @Override
     public Item save(Item item) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
-        return item;
+        return tx(session -> {
+            session.save(item);
+            return item;
+        });
     }
 
     @Override
     public List<Item> findAll() {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        List<Item>  items = session.createQuery("from Item").getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return items;
+        return tx(session -> session.createQuery("from Item").getResultList());
     }
 
     @Override
     public List<Item> findUncompleted() {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        List<Item>  items = session.createQuery("from Item i where i.done = false ")
-                .getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return items;
+        return tx(session -> session.createQuery("from Item i where i.done = false ").getResultList());
     }
 
     @Override
     public void delete(int id) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        Item item = new Item();
-        item.setId(id);
-        session.delete(item);
-        session.getTransaction().commit();
-        session.close();
+        tx(session -> session.createQuery("delete from Item i where i.id = :param")
+                .setParameter("param", id)
+                .executeUpdate());
     }
 
     @Override
     public void deleteAll() {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        session.createQuery("delete from Item").executeUpdate();
-        session.getTransaction().commit();
-        session.close();
+        tx(session -> session.createQuery("delete from Item").executeUpdate());
     }
 
     @Override
     public void update(int id) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        Item item = session.get(Item.class, id);
-        item.setDone(true);
-        session.update(item);
-        session.getTransaction().commit();
-        session.close();
+        tx(session -> {
+            Item item = session.get(Item.class, id);
+            item.setDone(true);
+            session.update(item);
+            return null;
+        });
     }
 
     @Override
