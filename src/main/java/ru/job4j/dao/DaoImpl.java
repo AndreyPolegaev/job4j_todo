@@ -6,9 +6,8 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.query.Query;
 import ru.job4j.entity.Item;
-
+import ru.job4j.entity.User;
 import java.util.List;
 import java.util.function.Function;
 
@@ -52,6 +51,27 @@ public class DaoImpl implements Store, AutoCloseable {
             session.save(item);
             return item;
         });
+    }
+
+    @Override
+    public User save(User user) {
+        return tx(session -> {
+            session.save(user);
+            return user;
+        });
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+       User user =  (User) tx(session -> session.createQuery("from User where email = :param")
+                .setParameter("param", email)
+                .uniqueResult());
+        return user;
+    }
+
+    public static void main(String[] args) {
+        User user = DaoImpl.instOf().findUserByEmail("1");
+        System.out.println(user);
     }
 
     @Override

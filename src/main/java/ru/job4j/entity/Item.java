@@ -28,10 +28,21 @@ public class Item {
     @Column(name = "done")
     private Boolean done;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Item(String description, Timestamp created, Boolean done) {
         this.description = description;
         this.created = created;
         this.done = done;
+    }
+
+    public Item(String description, Timestamp created, Boolean done, User user) {
+        this.description = description;
+        this.created = created;
+        this.done = done;
+        this.user = user;
     }
 
     @Override

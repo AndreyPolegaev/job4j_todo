@@ -1,6 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!doctype html>
 <html lang="ru">
-<%@ page contentType="text/html;charset=utf-8" %>
 
 <head>
     <!-- Required meta tags -->
@@ -22,7 +24,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>TodoList</title>
-
 </head>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -31,6 +32,7 @@
 <body>
 <div class="container1">
     <h1>TodoList - список дел</h1>
+        <a href="<%=request.getContextPath()%>/out" id="nameForm"> <c:out value="${user.name}"/> | Выйти</a>
     <br>
     <br>
     <form>
@@ -39,7 +41,6 @@
             <input type="text" id="description" class="form-desc" placeholder="Описание задачи?">
             <button type="button" id="bt2" onclick="clear1()">Очистить список задач</button>
         </div>
-
         <div class="form-check">
             <input type="checkbox" id="selected" onchange="func1()">
             <label class="form-check-label" id="label" for="selected">
@@ -50,7 +51,6 @@
 </div>
 <br>
 <br>
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -62,6 +62,7 @@
                     <th scope="col">Статус</th>
                     <th scope="col">Выполнено</th>
                     <th scope="col">Удалить задачу</th>
+                    <th scope="col">Автор</th>
                 </tr>
                 </thead>
                 <tbody>

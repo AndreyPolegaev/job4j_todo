@@ -6,10 +6,13 @@
 TodoList.
 
 What was used: 
-Java 14, Hibernate, Lombok, AJAX, Bootstrap, HTML, CSS
+Java 14, Hibernate, Lombok, AJAX, Bootstrap, HTML, CSS, Java Script
 
 This application provides the following service: add task, delete task, delete all tasks, we can mark it 
 as completed, show all tasks - completed and uncompleted. 
+Validating all the forms, registration - autorisation with checking user presents or absents in the data base.
+Sheets have uni-directional connection. 
+Each task connects with its own user.
 
 Contacts: 
 
@@ -17,6 +20,16 @@ Contacts:
 
 Telegram: https://t.me/Andrey_Polegaev
 ![alt text](src/main/webapp/images/sc1.png)
+
 ![alt text](src/main/webapp/images/sc2.png)
-![alt text](src/main/webapp/images/sc3.png)
+
+![alt text](src/main/webapp/images/sc12.png)
+
+![alt text](src/main/webapp/images/a1.png)
+
+![alt text](src/main/webapp/images/a2.png)
+
+![alt text](src/main/webapp/images/bd.png)
+
+
 
