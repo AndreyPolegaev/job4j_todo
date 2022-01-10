@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +26,8 @@ public class Item {
     private String description;
 
     @Column(name = "created")
-    private Timestamp created;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     @Column(name = "done")
     private Boolean done;
@@ -47,7 +49,7 @@ public class Item {
         this.done = done;
     }
 
-    public Item(String description, Timestamp created, Boolean done, User user) {
+    public Item(String description, Date created, Boolean done, User user) {
         this.description = description;
         this.created = created;
         this.done = done;

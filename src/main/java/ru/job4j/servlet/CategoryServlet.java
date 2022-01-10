@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/category")
@@ -45,7 +46,7 @@ public class CategoryServlet extends HttpServlet {
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
         User currentUser = (User) req.getSession().getAttribute("user");
-        Item item = new Item(desc, Timestamp.valueOf(LocalDateTime.now()), false, currentUser);
+        Item item = new Item(desc, new Date(System.currentTimeMillis()), false, currentUser);
         DaoImpl.instOf().save(item, ids);
         resp.sendRedirect(req.getContextPath() + "/index.jsp");
     }
