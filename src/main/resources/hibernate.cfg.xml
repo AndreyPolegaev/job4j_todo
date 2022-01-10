@@ -6,7 +6,7 @@
     <session-factory>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/todo</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.connection.pool_size">5</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">password</property>
@@ -15,9 +15,11 @@
         <property name="hibernate.default_schema">public</property>
         <property name="hibernate.default_catalog">todo</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.connection.characterEncoding">UTF-8</property>
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
         <mapping class="ru.job4j.entity.Item"/>
         <mapping class="ru.job4j.entity.User"/>
+        <mapping class="ru.job4j.entity.Category"/>
     </session-factory>
 </hibernate-configuration>

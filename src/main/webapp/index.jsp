@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!doctype html>
 <html lang="ru">
@@ -30,24 +30,48 @@
 <script src="js/main.js"></script>
 
 <body>
+
 <div class="container1">
     <h1>TodoList - список дел</h1>
-        <a href="<%=request.getContextPath()%>/out" id="nameForm"> <c:out value="${user.name}"/> | Выйти</a>
+    <a href="<%=request.getContextPath()%>/out" id="nameForm"> <c:out value="${user.name}"/> | Выйти</a>
     <br>
     <br>
-    <form>
-        <div class="input-group1">
-            <button type="button" id="bt1" onclick="uploadInDB()">Добавить задачу</button>
-            <input type="text" id="description" class="form-desc" placeholder="Описание задачи?">
-            <button type="button" id="bt2" onclick="clear1()">Очистить список задач</button>
+</div>
+
+<div class="container pt-2">
+    <div class="row">
+        <div class="card" id="mainForm" style="width: 95%">
+            <div class="card-header" id="label1" style="font-weight: bold; font-size: larger">
+                Добавьте задачу и выберите категорию задачи
+            </div>
+            <div class="card-body">
+                <form action="<c:url value='/category'/>" method='POST' accept-charset="UTF-8">
+                    <div class="input-group1">
+                        <button type="submit" id="bt1">Добавить задачу</button>
+                        <input type="text" id="description" name="desc" class="form-desc"
+                               placeholder="Описание задачи?">
+                        <button type="button" id="bt2" onclick="clear1()">Очистить список задач</button>
+                        <br>
+                        <br>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="cIds" id="cIds" multiple>
+                                <option></option>
+                                <c:forEach items="${categories}" var="category">
+                                    <option value='<c:out value="${category.id}"/>'>${category.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="selected" onchange="func1()">
+                        <label class="form-check-label" id="label" for="selected">
+                            Показать все задачи
+                        </label>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-check">
-            <input type="checkbox" id="selected" onchange="func1()">
-            <label class="form-check-label" id="label" for="selected">
-                Показать все задачи
-            </label>
-        </div>
-    </form>
+    </div>
 </div>
 <br>
 <br>

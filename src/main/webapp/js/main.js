@@ -72,35 +72,46 @@ $(document).ready(function () {
                     '   height="20" alt="Пример"></a>' + '</td>' +
                     '<td>' + '<a href=' + linkDelete + '><img src="images/clear.png" width="20" \n' +
                     '   height="20" alt="Пример"></a>' + '</td>' +
-
                     '<td>' + data[i].user.name + '</td>' +
                     '</tr>'
                 );
         }
+        category();
     }).fail(function (err) {
         console.log(err);
     });
 });
 
 /**
- Добавление задачи в БД.Отправляем в сервлет значение из input id="description"
- Валидация формы на пустое поле
+ * Вызывается из функции ready при загрузке страницы
  */
-function uploadInDB() {
-    let description = $('#description');
-    if (description.val() === '') {
-        alert('Заполните поле')
-        return false;
-    }
+function category() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/todo/category',
+        dataType: 'json'
+    }).done(function (data) {
+        let caregories = "";
+        for (let i = 0; i < data.length; i++) {
+            caregories += "<option value=" + data[i].id + ">" + data[i].name + "</option>";
+        }
+        $('.form-control').html(caregories);
+
+    }).fail(function (err) {
+        alert(err);
+    });
+}
+
+/** Очистка БД  */
+function clear1() {
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8080/todo/mainServlet',
-        data: 'desc=' + $('.form-desc').val(),
-        dataType: 'json'
+        url: 'http://localhost:8080/todo/deleteAll',
+        dataType: 'text'
     }).done(function (data) {
         document.location.href = 'http://localhost:8080/todo/index.jsp';
     }).fail(function (err) {
-        alert(err);
+        console.log(err)
     });
 }
 
@@ -128,7 +139,7 @@ function reg() {
     let email = $('#email');
     let password = $('#password');
     let array = [name, email, password];
-    for (let i = 0; i < array.length ; i++) {
+    for (let i = 0; i < array.length; i++) {
         if (array[i].val() === '') {
             alert("заполните все поля")
             return false;
@@ -137,7 +148,7 @@ function reg() {
     $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/todo/reg',
-        data: ({name: name.val() , email: email.val(), password: password.val()}),
+        data: ({name: name.val(), email: email.val(), password: password.val()}),
         dataType: 'text'
     }).done(function (data) {
         if ($.trim(data)) {
@@ -160,7 +171,7 @@ function auth() {
     let email = $('#email1');
     let password = $('#password1');
     let array = [email, password];
-    for (let i = 0; i < array.length ; i++) {
+    for (let i = 0; i < array.length; i++) {
         if (array[i].val() === '') {
             alert("заполните все поля")
             return false;

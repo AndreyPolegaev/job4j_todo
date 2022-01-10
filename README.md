@@ -6,7 +6,23 @@
 TodoList.
 
 What was used: 
-Java 14, Hibernate, Lombok, AJAX, Bootstrap, HTML, CSS, Java Script
+
+Java 14, 
+Java EE Servlets,
+Hibernate,
+PostgreSQL,
+Apache Maven,
+Apache Tomcat,
+Json,
+Log4j2,
+Lombok,
+AJAX,
+Bootstrap,
+HTML,
+CSS,
+jQuery,
+Java Script,
+Wrapper template data base.
 
 This application provides the following service: add task, delete task, delete all tasks, we can mark it 
 as completed, show all tasks - completed and uncompleted. 
@@ -19,17 +35,13 @@ Contacts:
 +7 964 630 77 53 (also whatsapp)
 
 Telegram: https://t.me/Andrey_Polegaev
-![alt text](src/main/webapp/images/sc1.png)
 
-![alt text](src/main/webapp/images/sc2.png)
-
-![alt text](src/main/webapp/images/sc12.png)
-
-![alt text](src/main/webapp/images/a1.png)
-
-![alt text](src/main/webapp/images/a2.png)
-
+![alt text](src/main/webapp/images/scc1.png)
+![alt text](src/main/webapp/images/scc1.png)
+![alt text](src/main/webapp/images/scc3.png)
+![alt text](src/main/webapp/images/scc4.png)
 ![alt text](src/main/webapp/images/bd.png)
+![alt text](src/main/webapp/images/scc5.png)
 
 
 

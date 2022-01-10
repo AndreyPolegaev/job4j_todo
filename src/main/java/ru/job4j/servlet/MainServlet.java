@@ -2,9 +2,9 @@ package ru.job4j.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lombok.extern.log4j.Log4j2;
 import ru.job4j.dao.DaoImpl;
 import ru.job4j.entity.Item;
-import ru.job4j.entity.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
 
 @WebServlet("/mainServlet")
+@Log4j2
 public class MainServlet extends HttpServlet {
 
     private static final Gson GSON = new GsonBuilder().create();
@@ -54,17 +53,5 @@ public class MainServlet extends HttpServlet {
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
         String desc = req.getParameter("desc");
-        User currentUser = (User) req.getSession().getAttribute("user");
-        Item item = new Item(desc, Timestamp.valueOf(LocalDateTime.now()), false, currentUser);
-        DaoImpl.instOf().save(item);
-        OutputStream output = resp.getOutputStream();
-        String itemJson = GSON.toJson(item);
-        output.write(itemJson.getBytes(StandardCharsets.UTF_8));
-        output.flush();
-        output.close();
-
-
     }
-
-
 }

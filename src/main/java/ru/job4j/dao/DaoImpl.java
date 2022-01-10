@@ -6,8 +6,11 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import ru.job4j.entity.Category;
 import ru.job4j.entity.Item;
 import ru.job4j.entity.User;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -46,9 +49,16 @@ public class DaoImpl implements Store, AutoCloseable {
     }
 
     @Override
-    public Item save(Item item) {
-        return tx(session -> {
-            session.save(item);
+    public Item save(Item item, String[] ids) {
+        Session session = sf.openSession();
+        if (ids != null) {
+            for (String temp : ids) {
+                Category category = session.load(Category.class, Integer.parseInt(temp));
+                item.addCategory(category);
+            }
+        }
+        return tx(ses -> {
+            ses.save(item);
             return item;
         });
     }
@@ -62,8 +72,13 @@ public class DaoImpl implements Store, AutoCloseable {
     }
 
     @Override
+    public List<Category> getAllCategories() {
+        return tx(session -> session.createQuery("from Category").getResultList());
+    }
+
+    @Override
     public User findUserByEmail(String email) {
-       User user =  (User) tx(session -> session.createQuery("from User where email = :param")
+        User user = (User) tx(session -> session.createQuery("from User where email = :param")
                 .setParameter("param", email)
                 .uniqueResult());
         return user;
