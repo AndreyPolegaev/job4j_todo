@@ -26,9 +26,9 @@ Wrapper template data base.
 
 This application provides the following service: add task, delete task, delete all tasks, we can mark it 
 as completed, show all tasks - completed and uncompleted. 
-Validating all the forms, registration - autorisation with checking user presents or absents in the data base.
+Validating all the forms, registration - authorisation with checking user presents or absents in the data base.
 Sheets have uni-directional connection. 
-Each task connects with its own user.
+Each task connects with its own user and each task has own list of categories.
 
 Contacts: 
 
@@ -36,8 +36,8 @@ Contacts:
 
 Telegram: https://t.me/Andrey_Polegaev
 
-![alt text](src/main/webapp/images/scc1.png)
-![alt text](src/main/webapp/images/scc1.png)
+![alt text](src/main/webapp/images/scc6.png)
+![alt text](src/main/webapp/images/scc7.png)
 ![alt text](src/main/webapp/images/scc3.png)
 ![alt text](src/main/webapp/images/scc4.png)
 ![alt text](src/main/webapp/images/bd.png)

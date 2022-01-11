@@ -51,7 +51,7 @@ public class DaoImpl implements Store, AutoCloseable {
     @Override
     public Item save(Item item, String[] ids) {
         Session session = sf.openSession();
-        if (ids != null) {
+        if (ids != null && ids.length != 0) {
             for (String temp : ids) {
                 Category category = session.load(Category.class, Integer.parseInt(temp));
                 item.addCategory(category);
@@ -91,12 +91,12 @@ public class DaoImpl implements Store, AutoCloseable {
 
     @Override
     public List<Item> findAll() {
-        return tx(session -> session.createQuery("from Item").getResultList());
+        return tx(session -> session.createQuery("select distinct i from Item i join fetch i.categories").getResultList());
     }
 
     @Override
     public List<Item> findUncompleted() {
-        return tx(session -> session.createQuery("from Item i where i.done = false ").getResultList());
+        return tx(session -> session.createQuery("select distinct i from Item i join fetch i.categories where i.done = false").getResultList());
     }
 
     @Override

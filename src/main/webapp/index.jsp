@@ -87,6 +87,7 @@
                     <th scope="col">Выполнено</th>
                     <th scope="col">Удалить задачу</th>
                     <th scope="col">Автор</th>
+                    <th scope="col">Категория</th>
                 </tr>
                 </thead>
                 <tbody>

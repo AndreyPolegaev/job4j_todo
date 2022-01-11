@@ -1,5 +1,7 @@
 /** показать все задачи (выполненные и не выполненные,  data: принимает true/false из checkbox)
  *  перед выводом - очистка таблицы
+ *  let cat = data[i].categories - получаем коллекцию категорий у Item
+ *  let nameOfCategory = "" - конкатенация по категориям
  */
 function func1() {
     var myTable = document.getElementById("table");
@@ -14,6 +16,7 @@ function func1() {
         data: 'index=' + document.getElementById('selected').checked,
     }).done(function (data) {
         for (let i = 0; i < data.length; i++) {
+            let nameOfCategory = "";
             let linkDelete = "http://localhost:8080/todo/deleteDB?id=" + data[i]['id'];
             let updateStatus = "http://localhost:8080/todo/UpdateStatus?id=" + data[i]['id'];
             let status;
@@ -22,6 +25,10 @@ function func1() {
                 status = "не выполнено"
             } else {
                 status = "выполнено";
+            }
+            let cat = data[i].categories;
+            for (let j = 0; j < cat.length; j++) {
+                nameOfCategory += cat[j].name + '<br>';
             }
             $('.table tr:last')
                 .after(
@@ -34,6 +41,7 @@ function func1() {
                     '<td>' + '<a href=' + linkDelete + '><img src="images/clear.png" width="20" \n' +
                     '   height="20" alt="Пример"></a>' + '</td>' +
                     '<td>' + data[i].user.name + '</td>' +
+                    '<td>' + nameOfCategory + '</td>' +
                     '</tr>'
                 );
         }
@@ -44,6 +52,8 @@ function func1() {
 
 /** Когда страница загружен выгружаем все НЕВЫПОЛНЕННЫЕ задачи из БД
  *  Из сервлета приходит List<Item> в виде JSON
+ *  let cat = data[i].categories - получаем коллекцию категорий у Item
+ *  let nameOfCategory = "" - конкатенация по категориям
  */
 $(document).ready(function () {
     $.ajax({
@@ -53,6 +63,7 @@ $(document).ready(function () {
         data: 'index=' + false
     }).done(function (data) {
         for (let i = 0; i < data.length; i++) {
+            let nameOfCategory = "";
             let linkDelete = "http://localhost:8080/todo/deleteDB?id=" + data[i]['id'];
             let updateStatus = "http://localhost:8080/todo/UpdateStatus?id=" + data[i]['id'];
             let status;
@@ -61,6 +72,10 @@ $(document).ready(function () {
                 status = "не выполнено"
             } else {
                 status = "выполнено";
+            }
+            let cat = data[i].categories;
+            for (let j = 0; j < cat.length; j++) {
+                nameOfCategory += cat[j].name + '<br>';
             }
             $('.table tr:last')
                 .after(
@@ -73,6 +88,7 @@ $(document).ready(function () {
                     '<td>' + '<a href=' + linkDelete + '><img src="images/clear.png" width="20" \n' +
                     '   height="20" alt="Пример"></a>' + '</td>' +
                     '<td>' + data[i].user.name + '</td>' +
+                    '<td>' + nameOfCategory + '</td>' +
                     '</tr>'
                 );
         }
